@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/EventCard.css';
 import { getEventImage, getSafeFallbackImage } from '../utils/eventImage';
-
+//update compont
 const EventCard = ({ event, onViewDetails, onRegister, showRegisterButton = true, onEdit, onDelete }) => {
   const isRegistered = event.userState === 'REGISTERED';
   const isFull = event.status === 'FULL';
