@@ -3,7 +3,7 @@ const normalizeApiBaseUrl = (apiUrl) => {
   if (!value) {
     return '/api';
   }
-
+// Remove any trailing slashes from the URL and ensure it correctly ends with /api
   const withoutTrailingSlash = value.replace(/\/+$/, '');
   if (withoutTrailingSlash.endsWith('/api')) {
     return withoutTrailingSlash;
@@ -11,7 +11,7 @@ const normalizeApiBaseUrl = (apiUrl) => {
 
   return `${withoutTrailingSlash}/api`;
 };
-
+// Normalize the API base URL at the module level so it's done once and reused across all API calls
 const API_BASE_URL = normalizeApiBaseUrl(process.env.REACT_APP_API_URL);
 
 const buildApiError = async (response, fallbackMessage) => {
