@@ -3,7 +3,7 @@ import eventsApi from '../api/eventsApi';
 import '../styles/AdminDashboardPage.css';
 import EventCard from '../components/EventCard';
 import { useNavigate } from 'react-router-dom';
-
+// Admin dashboard page to view all events, stats, and manage events
 const AdminDashboardPage = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
