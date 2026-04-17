@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import eventsApi from '../api/eventsApi';
 import '../styles/EventDetailsPage.css';
 import { getEventImage, getSafeFallbackImage } from '../utils/eventImage';
-
+// Event details page to view event information and register/cancel registration
 const EventDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
