@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import eventsApi from '../api/eventsApi';
 import '../styles/MyEventsPage.css';
 import EventCard from '../components/EventCard';
-
+// My events page to view registered and waitlisted events with tabbed navigation
 const MyEventsPage = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ const MyEventsPage = () => {
       setLoading(false);
     }
   };
-
+// Filter events into registered and waitlisted categories for tabbed display
   const registeredEvents = events.filter(e => e.userState === 'REGISTERED');
   const waitlistedEvents = events.filter(e => e.userState === 'WAITLISTED');
 
