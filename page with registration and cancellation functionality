@@ -1,0 +1,12 @@
+[33ma6c4dd58[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mevent-management[m[33m, [m[1;31morigin/event-management[m[33m)[m feat: add event details page with registration and cancellation functionality
+[33md8bdf762[m feat: add create/edit event form with validation and API integration
+[33mb6961d00[m feat: update AdminDashboardPage Add All Events page with search, status filtering, and event counts
+[33m597975b4[m feat: update AdminDashboardPage
+[33m76479120[m feat(events): update eventsApi with API methods1
+[33m50486c2a[m feat(layout): update Layout component structure
+[33m42a9c1d9[m feat(events): update eventsApi with API methods1
+[33m97b7ddaa[m feat(events): add EventCard component1
+[33m6863f027[m feat(events): add EventCard component
+[33mca255cb0[m Merge branch 'event-management' of https://github.com/savinasenanayake/PAF_assignment into event-management
+[33m29766456[m[33m ([m[1;32mmaster[m[33m)[m initial commit
+[33me163b844[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/Maintenance-&-Incident-Ticketing[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;31morigin/Facilities-catalogue-and-resource-management-endpoints[m[33m)[m Initial commit

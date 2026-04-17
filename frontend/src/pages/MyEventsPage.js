@@ -31,7 +31,7 @@ const MyEventsPage = () => {
 
   if (loading) return <div className="my-events-page"><p>Loading...</p></div>;
   if (error) return <div className="my-events-page"><p style={{ color: 'red' }}>{error}</p></div>;
-
+// Render tabbed interface for registered and waitlisted events with counts and event cards
   return (
     <div className="my-events-page">
       <h1>My Events</h1>
