@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import eventsApi from '../api/eventsApi';
 import '../styles/CreateEventPage.css';
-
+// Create/Edit event page with form validation and API integration
 const CreateEventPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -67,7 +67,7 @@ const CreateEventPage = () => {
     }));
     setFieldErrors((prev) => ({ ...prev, [name]: '' }));
   };
-
+// Validate form fields with comprehensive checks and return an object of field errors
   const validateForm = () => {
     const errors = {};
 
