@@ -13,7 +13,7 @@ const AdminDashboardPage = () => {
   useEffect(() => {
     loadAllEvents();
   }, []);
-
+// Load all events from the API and handle loading/error states
   const loadAllEvents = async () => {
     try {
       setLoading(true);
