@@ -1,0 +1,158 @@
+.details-page {
+  max-width: 1000px;
+}
+/* Styles for the event details page with responsive layout and action buttons*/
+.back-btn {
+  background: none;
+  border: none;
+  color: #667eea;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 8px 0;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.back-btn:hover {
+  color: #5568d3;
+}
+/* Event details container styles with responsive layout */
+.details-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+}
+
+.details-image {
+  width: 40%;
+  object-fit: cover;
+  max-height: 500px;
+}
+
+.details-content {
+  flex: 1;
+  padding: 30px;
+}
+
+.details-content h1 {
+  margin-top: 0;
+  font-size: 28px;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.event-meta {
+  background-color: #f9fafb;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.event-meta p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.event-meta strong {
+  color: #1f2937;
+}
+
+.status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status.OPEN {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status.FULL {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.status.CLOSED {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.details-description {
+  margin-bottom: 20px;
+}
+
+.details-description h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #1f2937;
+}
+
+.details-description p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-register,
+.btn-cancel {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-register {
+  background-color: #10b981;
+  color: white;
+}
+
+.btn-register:hover {
+  background-color: #059669;
+}
+
+.btn-cancel {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #dc2626;
+}
+
+@media (max-width: 768px) {
+  .details-container {
+    flex-direction: column;
+  }
+
+  .details-image {
+    width: 100%;
+    height: 250px;
+  }
+
+  .details-content {
+    padding: 20px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .btn-register,
+  .btn-cancel {
+    width: 100%;
+  }
+}
