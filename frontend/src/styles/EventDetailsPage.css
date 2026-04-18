@@ -1,7 +1,7 @@
 .details-page {
   max-width: 1000px;
 }
-
+/* Styles for the event details page with responsive layout and action buttons*/
 .back-btn {
   background: none;
   border: none;
@@ -17,7 +17,7 @@
 .back-btn:hover {
   color: #5568d3;
 }
-
+/* Event details container styles with responsive layout */
 .details-container {
   background: white;
   border-radius: 12px;
