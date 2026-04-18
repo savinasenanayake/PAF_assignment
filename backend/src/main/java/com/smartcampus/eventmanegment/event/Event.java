@@ -20,7 +20,7 @@ public class Event {
     private LocalDate date;
 
     private String startTime;
-// Support both 24-hour and AM/PM time formats for end time.
+
     private String endTime;
 
     private String location;
