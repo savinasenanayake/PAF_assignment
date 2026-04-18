@@ -15,7 +15,7 @@
   margin-bottom: 30px;
   flex-wrap: wrap;
 }
-
+/*Search bar and status filter styles for event listing page with responsive design*/
 .search-bar {
   flex: 1;
   min-width: 200px;
