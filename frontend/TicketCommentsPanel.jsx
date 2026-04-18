@@ -9,7 +9,7 @@ const STAFF_ROLES = new Set(['ADMIN', 'MANAGER', 'TECHNICIAN']);
 
 const ROLE_STYLE = {
   ADMIN: { background: '#fef3c7', color: '#92400e' },
-  MANAGER: { background: '#f3e8ff', color: '#6b21a8' },
+  MANAGER: { background: '#7606efff', color: '#6b21a8' },
   TECHNICIAN: { background: '#dbeafe', color: '#1e40af' },
   USER: { background: '#dcfce7', color: '#166534' },
 };
@@ -203,10 +203,10 @@ export default function TicketCommentsPanel({
           />
           <div style={styles.rowBtns}>
             <button type="button" style={styles.cancelBtn} onClick={() => setEditingId('')}>
-              Cancel
+              Cancel 2
             </button>
             <button type="button" style={styles.primaryBtn} onClick={saveEdit} disabled={saving}>
-              Save
+              Save 2
             </button>
           </div>
         </div>
@@ -217,7 +217,7 @@ export default function TicketCommentsPanel({
       <div style={styles.rowBtns}>
         {isStaff && !isReply && (
           <button type="button" style={styles.secondaryBtn} onClick={() => setReplyTo(comment.id)}>
-            Reply
+            Reply 2
           </button>
         )}
         {canEdit(comment) && editingId !== comment.id && (
