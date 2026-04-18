@@ -9,9 +9,13 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
+        // Apply CORS rules only to backend API routes.
         registry.addMapping("/api/**")
+                // Allow requests from the local frontend during development.
                 .allowedOrigins("http://localhost:3000")
+                // Validation of allowed HTTP verbs for cross-origin calls.
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                // Accept any request headers sent by the frontend.
                 .allowedHeaders("*");
     }
 }
