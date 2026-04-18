@@ -7,14 +7,14 @@ const CATEGORY_THEME = {
   tech: { from: '#0f172a', to: '#334155', icon: 'Tech' },
   conference: { from: '#374151', to: '#6b7280', icon: 'Conference' },
 };
-
+// Default theme for events without a specific category
 const DEFAULT_THEME = { from: '#1e3a8a', to: '#2563eb', icon: 'Campus Event' };
 
 const getTheme = (category) => {
   const key = (category || '').trim().toLowerCase();
   return CATEGORY_THEME[key] || DEFAULT_THEME;
 };
-
+// Generates a dynamic SVG image as a data URI based on event category and title
 const escapeXml = (value) =>
   value
     .replace(/&/g, '&amp;')
