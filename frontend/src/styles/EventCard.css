@@ -8,7 +8,7 @@
   flex-direction: column;
   height: 100%;
 }
-
+/* Event card styles with hover effects and responsive design for event listing*/
 .event-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
