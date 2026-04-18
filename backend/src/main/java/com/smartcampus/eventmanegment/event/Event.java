@@ -7,13 +7,16 @@ import java.time.LocalDate;
 @Document(collection = "events")
 public class Event {
 
+    // MongoDB document identifier.
     @Id
     private String id;
 
+    // Basic event details shown in the UI and API responses.
     private String title;
 
     private String description;
 
+    // Scheduled date and time information for the event.
     private LocalDate date;
 
     private String startTime;
@@ -24,10 +27,12 @@ public class Event {
 
     private String campus;
 
+    // Registration and capacity tracking.
     private Integer capacity;
 
     private Integer registered;
 
+    // Current event state and display metadata.
     private String status;
 
     private String imageUrl;
@@ -36,6 +41,7 @@ public class Event {
 
     private String organizer;
 
+    // Tracks the current user's relation to this event, such as REGISTERED or NONE.
     private String userState;
 
     public String getId() {
