@@ -1,4 +1,5 @@
 <# : batch portion
+@REM Project note: Use this Maven Wrapper script to run backend builds with a consistent Maven version.
 @REM ----------------------------------------------------------------------------
 @REM Licensed to the Apache Software Foundation (ASF) under one
 @REM or more contributor license agreements.  See the NOTICE file
@@ -187,3 +188,4 @@ try {
 }
 
 Write-Output "MVN_CMD=$MAVEN_HOME/bin/$MVN_CMD"
+// End of script
