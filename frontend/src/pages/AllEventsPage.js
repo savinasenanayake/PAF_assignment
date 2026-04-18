@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import eventsApi from '../api/eventsApi';
 import '../styles/AllEventsPage.css';
 import EventCard from '../components/EventCard';
-
+// All events page with search, filter, and event listing
 const AllEventsPage = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ const AllEventsPage = () => {
   useEffect(() => {
     loadEvents();
   }, [loadEvents]);
-
+// Calculate event counts by status for filter dropdown with comprehensive status handling
   const statusCounts = useMemo(() => {
     const counts = {
       ALL: events.length,

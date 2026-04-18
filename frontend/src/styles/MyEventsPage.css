@@ -8,7 +8,7 @@
   color: #1f2937;
   margin-bottom: 30px;
 }
-
+/* Tabs for filtering events by status with responsive design for my events page */
 .tabs {
   display: flex;
   gap: 10px;

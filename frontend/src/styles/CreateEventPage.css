@@ -1,7 +1,7 @@
 .create-event-page {
   max-width: 900px;
 }
-
+/* Styles for the create event page with responsive form layout and error handling */
 .back-btn {
   background: none;
   border: none;
@@ -31,7 +31,7 @@
   font-size: 28px;
   color: #1f2937;
 }
-
+/* Form styles with focus states and responsive design for create event page */
 .error-message {
   color: #ef4444;
   background-color: #fee2e2;
