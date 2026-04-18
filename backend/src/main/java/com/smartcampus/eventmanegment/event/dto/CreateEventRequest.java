@@ -14,42 +14,51 @@ import java.time.format.DateTimeParseException;
 
 public class CreateEventRequest {
 
+    // Basic event identity validation.
     @NotBlank(message = "Title is required")
     @Size(min = 3, max = 120, message = "Title must be between 3 and 120 characters")
     private String title;
 
+    // Require enough detail for the event description.
     @NotBlank(message = "Description is required")
     @Size(min = 10, max = 2000, message = "Description must be between 10 and 2000 characters")
     private String description;
 
+    // The event date must always be provided.
     @NotNull(message = "Date is required")
     private LocalDate date;
 
+    // Support both 24-hour and AM/PM time formats for start time.
     @NotBlank(message = "Start time is required")
     @Pattern(
             regexp = "^([01]\\d|2[0-3]):[0-5]\\d$|^(?i)(0?[1-9]|1[0-2]):[0-5]\\d\\s?(AM|PM)$",
             message = "Start time must be in HH:mm or hh:mm AM/PM format")
     private String startTime;
 
+    // Support both 24-hour and AM/PM time formats for end time.
     @NotBlank(message = "End time is required")
     @Pattern(
             regexp = "^([01]\\d|2[0-3]):[0-5]\\d$|^(?i)(0?[1-9]|1[0-2]):[0-5]\\d\\s?(AM|PM)$",
             message = "End time must be in HH:mm or hh:mm AM/PM format")
     private String endTime;
 
+    // Keep location and campus values present and reasonably short.
     @NotBlank(message = "Location is required")
     @Size(max = 200, message = "Location must be at most 200 characters")
     private String location;
 
+    // Campus is required so the event can be placed correctly.
     @NotBlank(message = "Campus is required")
     @Size(max = 120, message = "Campus must be at most 120 characters")
     private String campus;
 
+    // Capacity must be a positive number within a safe upper bound.
     @NotNull(message = "Capacity is required")
     @Min(value = 1, message = "Capacity must be at least 1")
     @Max(value = 100000, message = "Capacity must be at most 100000")
     private Integer capacity;
 
+    // Category and organizer are mandatory metadata fields.
     @NotBlank(message = "Category is required")
     @Size(max = 80, message = "Category must be at most 80 characters")
     private String category;
@@ -58,17 +67,20 @@ public class CreateEventRequest {
     @Size(max = 120, message = "Organizer must be at most 120 characters")
     private String organizer;
 
+    // Optional image URL must use a valid web protocol when provided.
     @Pattern(
             regexp = "^https?:\\/\\/.+",
             message = "Image URL must start with http:// or https://")
     private String imageUrl;
 
+    // Status must match the supported event states used by the application.
     @NotBlank(message = "Status is required")
     @Pattern(
             regexp = "^(Open|Full|Closed)$",
             message = "Status must be Open, Full, or Closed")
     private String status;
 
+    // Custom validation: the end time must be later than the start time.
     @AssertTrue(message = "End time must be after start time")
     public boolean isValidTimeRange() {
         if (startTime == null || endTime == null || startTime.isBlank() || endTime.isBlank()) {
