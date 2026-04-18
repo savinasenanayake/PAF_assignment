@@ -5,7 +5,7 @@ import { getTechnicianOverview, updateAssignedTicket } from '../api/technicianAp
 import TicketCommentsPanel from '../components/TicketCommentsPanel';
 
 const STATUS_STYLE = {
-  OPEN: { background: '#fee2e2', color: '#ff0000ff' },
+  OPEN: { background: '#fee2e2', color: '#991b1b' },
   PENDING: { background: '#fef3c7', color: '#92400e' },
   IN_PROGRESS: { background: '#fef3c7', color: '#92400e' },
   RESOLVED: { background: '#dcfce7', color: '#166534' },
