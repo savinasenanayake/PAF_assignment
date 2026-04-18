@@ -15,31 +15,40 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // Applies to all backend endpoints (for example: /api/events, /api/events/{id}).
+
+    // Handles @Valid payload validation failures and returns field-level messages.
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException exception) {
+        // Build a map like: { "fieldName": "validation message" }.
         Map<String, String> fieldErrors = new HashMap<>();
         for (FieldError error : exception.getBindingResult().getFieldErrors()) {
             fieldErrors.put(error.getField(), error.getDefaultMessage());
         }
 
+        // Return a consistent 400 response with both summary and field details.
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Validation failed");
         response.put("errors", fieldErrors);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
+    // Handles unknown routes when a client calls a non-existing endpoint URL.
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(NoHandlerFoundException exception) {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Endpoint not found");
         response.put("status", HttpStatus.NOT_FOUND.value());
         response.put("error", "Not Found");
+        // Include the requested endpoint path to help clients debug invalid URLs.
         response.put("path", exception.getRequestURL());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
+    // Preserves explicit HTTP status raised by endpoint logic in controllers/services.
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<Map<String, Object>> handleResponseStatusException(ResponseStatusException exception) {
+        // Resolve the numeric status; fallback to 500 if an unknown code is provided.
         HttpStatus status = HttpStatus.resolve(exception.getStatusCode().value());
         if (status == null) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -52,6 +61,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(response);
     }
 
+    // Converts database access failures into 503 so clients can retry later.
     @ExceptionHandler(DataAccessException.class)
     public ResponseEntity<Map<String, Object>> handleDataAccessException(DataAccessException exception) {
         Map<String, Object> response = new HashMap<>();
@@ -62,6 +72,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(response);
     }
 
+    // Final safety net for uncaught exceptions to avoid leaking stack traces to clients.
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGenericException(Exception exception) {
         Map<String, Object> response = new HashMap<>();
