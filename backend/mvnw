@@ -1,4 +1,5 @@
 #!/bin/sh
+# Project note: Use this Maven Wrapper script to run backend builds with a consistent Maven version.
 # ----------------------------------------------------------------------------
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
