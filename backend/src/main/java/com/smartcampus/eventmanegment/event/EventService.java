@@ -27,6 +27,7 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
+    // Service helper for the GET /api/events endpoint.
     public List<Event> getAllEvents() {
         try {
             return eventRepository.findAll().stream().sorted(Comparator.comparing(Event::getDate)).toList();
@@ -36,6 +37,7 @@ public class EventService {
         }
     }
 
+    // Service helper for the GET /api/events/my endpoint.
     public List<Event> getMyEvents() {
         try {
             return eventRepository.findByUserStateNot(USER_STATE_NONE).stream()
@@ -47,11 +49,13 @@ public class EventService {
         }
     }
 
+    // Service helper for the GET /api/events/{id} endpoint.
     public Event getEvent(String id) {
         return eventRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
     }
 
+    // Called by the POST /api/events endpoint after controller-level validation succeeds.
     public Event createEvent(CreateEventRequest request) {
         Event event = new Event();
         applyEventRequest(event, request);
@@ -60,6 +64,7 @@ public class EventService {
         return eventRepository.save(event);
     }
 
+    // Called by the PUT /api/events/{id} endpoint with an already validated request body.
     public Event updateEvent(String id, CreateEventRequest request) {
         Event event = getEvent(id);
         applyEventRequest(event, request);
@@ -74,11 +79,13 @@ public class EventService {
         return eventRepository.save(event);
     }
 
+    // Service helper for the DELETE /api/events/{id} endpoint.
     public void deleteEvent(String id) {
         Event event = getEvent(id);
         eventRepository.delete(event);
     }
 
+    // Service helper for the POST /api/events/{id}/register endpoint.
     public Event register(String id) {
         Event event = getEvent(id);
         if (event.getRegistered() >= event.getCapacity()) {
@@ -99,6 +106,7 @@ public class EventService {
         return eventRepository.save(event);
     }
 
+    // Service helper for the POST /api/events/{id}/cancel endpoint.
     public Event cancelRegistration(String id) {
         Event event = getEvent(id);
         if (USER_STATE_REGISTERED.equals(event.getUserState()) && event.getRegistered() > 0) {
@@ -109,6 +117,7 @@ public class EventService {
         return eventRepository.save(event);
     }
 
+    // Copies validated request data into the Event entity.
     private void applyEventRequest(Event event, CreateEventRequest request) {
         event.setTitle(request.getTitle());
         event.setDescription(request.getDescription());
@@ -131,6 +140,7 @@ public class EventService {
         }
     }
 
+    // Generates a fallback image URL when the request does not provide one.
     private String generateAutoImageUrl(CreateEventRequest request) {
         String category = request.getCategory() == null ? "event" : request.getCategory().trim();
         String title = request.getTitle() == null ? "campus event" : request.getTitle().trim();
@@ -139,6 +149,7 @@ public class EventService {
         return AUTO_IMAGE_BASE_URL + "?text=" + encodedText;
     }
 
+    // Recomputes the display status from capacity and registration count.
     private void recalculateStatus(Event event) {
         if (event.getRegistered() >= event.getCapacity()) {
             event.setStatus("Registration Full");
