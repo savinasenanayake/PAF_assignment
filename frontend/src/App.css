@@ -1,25 +1,40 @@
+/* Apply base reset rules to all elements */
 * {
+  /* Remove default margin from all elements */
   margin: 0;
+  /* Remove default padding from all elements */
   padding: 0;
+  /* Keep layout sizing predictable across elements */
   box-sizing: border-box;
 }
 
+/* Define global page-level body styling */
 body {
+  /* Ensure body starts with zero margin */
   margin: 0;
+  /* Use a broad cross-platform sans-serif font stack */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
     'Helvetica Neue', sans-serif;
+  /* Improve text rendering on WebKit-based browsers */
   -webkit-font-smoothing: antialiased;
+  /* Improve text rendering on macOS Firefox */
   -moz-osx-font-smoothing: grayscale;
+  /* Set a light gray background for the app */
   background-color: #f5f5f5;
 }
 
+/* Style inline code and code blocks with monospace fonts */
 code {
+  /* Apply monospace font family for code readability */
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
+/* Size the root React mount container */
 #root {
+  /* Make root container take full available width */
   width: 100%;
+  /* Make root container take full available height */
   height: 100%;
 }
