@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { FiPlus, FiCheckCircle } from "react-icons/fi";
-import { createResource } from "../services/ResourceService";
+import React, { useState, useEffect } from "react";
+import { FiPlus, FiCheckCircle, FiX } from "react-icons/fi";
+import { createResource, updateResource } from "../services/ResourceService";
 
-function ResourceForm({ refresh }) {
+function ResourceForm({ refresh, editingResource, onCancelEdit }) {
   const [form, setForm] = useState({
     name: "",
     type: "LECTURE_HALL",
@@ -13,6 +13,30 @@ function ResourceForm({ refresh }) {
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  // Populate form when editing
+  useEffect(() => {
+    if (editingResource) {
+      setForm({
+        name: editingResource.name,
+        type: editingResource.type,
+        capacity: editingResource.capacity,
+        location: editingResource.location,
+        status: editingResource.status,
+        availabilityWindows: ""
+      });
+    } else {
+      // Reset form when not editing
+      setForm({
+        name: "",
+        type: "LECTURE_HALL",
+        capacity: 0,
+        location: "",
+        status: "ACTIVE",
+        availabilityWindows: ""
+      });
+    }
+  }, [editingResource]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -30,43 +54,80 @@ function ResourceForm({ refresh }) {
     try {
       setLoading(true);
       const data = {
-        ...form,
+        name: form.name,
+        type: form.type,
         capacity: parseInt(form.capacity),
+        location: form.location,
+        status: form.status,
         availabilityWindows: form.availabilityWindows
           ? form.availabilityWindows.split(",").map(w => w.trim())
           : []
       };
 
-      await createResource(data);
-      setSuccess(true);
-      setForm({
-        name: "",
-        type: "LECTURE_HALL",
-        capacity: 0,
-        location: "",
-        status: "ACTIVE",
-        availabilityWindows: ""
-      });
+      if (editingResource) {
+        // Update existing resource
+        await updateResource(editingResource.id, data);
+        setSuccess(true);
+        if (onCancelEdit) onCancelEdit();
+      } else {
+        // Create new resource
+        await createResource(data);
+        setSuccess(true);
+        setForm({
+          name: "",
+          type: "LECTURE_HALL",
+          capacity: 0,
+          location: "",
+          status: "ACTIVE",
+          availabilityWindows: ""
+        });
+      }
       
       setTimeout(() => setSuccess(false), 3000);
       refresh();
     } catch (error) {
-      console.error("Failed to create resource:", error);
+      console.error("Failed to save resource:", error);
+      alert("Error saving resource");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleCancel = () => {
+    setForm({
+      name: "",
+      type: "LECTURE_HALL",
+      capacity: 0,
+      location: "",
+      status: "ACTIVE",
+      availabilityWindows: ""
+    });
+    if (onCancelEdit) onCancelEdit();
+  };
+
   return (
     <div className="card p-6 animate-fade-in">
-      <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
-        Add New Resource
-      </h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          {editingResource ? "Edit Resource" : "Add New Resource"}
+        </h2>
+        {editingResource && (
+          <button
+            onClick={handleCancel}
+            className="btn-icon text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+            title="Cancel editing"
+          >
+            <FiX className="w-5 h-5" />
+          </button>
+        )}
+      </div>
 
       {success && (
         <div className="mb-4 p-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 border border-green-200 dark:border-green-800 rounded-lg flex items-center gap-2 text-green-700 dark:text-green-300">
           <FiCheckCircle className="w-5 h-5" />
-          <span className="font-medium">Resource created successfully!</span>
+          <span className="font-medium">
+            {editingResource ? "Resource updated successfully!" : "Resource created successfully!"}
+          </span>
         </div>
       )}
 
@@ -167,7 +228,7 @@ function ResourceForm({ refresh }) {
           className="w-full btn-primary flex items-center justify-center gap-2 mt-6"
         >
           <FiPlus className="w-5 h-5" />
-          {loading ? "Adding..." : "Add Resource"}
+          {loading ? (editingResource ? "Updating..." : "Adding...") : (editingResource ? "Update Resource" : "Add Resource")}
         </button>
       </form>
     </div>

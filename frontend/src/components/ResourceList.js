@@ -1,7 +1,7 @@
 import React from "react";
-import { FiTrash2, FiMapPin, FiUsers, FiTag } from "react-icons/fi";
+import { FiTrash2, FiMapPin, FiUsers, FiTag, FiEdit2 } from "react-icons/fi";
 
-function ResourceList({ resources, deleteResource, loading }) {
+function ResourceList({ resources, deleteResource, editResource, loading }) {
   const getStatusBadge = (status) => {
     if (status === "AVAILABLE") {
       return <span className="badge-success">✓ Available</span>;
@@ -79,13 +79,22 @@ function ResourceList({ resources, deleteResource, loading }) {
                   </div>
                 </div>
 
-                <button
-                  onClick={() => deleteResource(r.id)}
-                  className="btn-icon text-red-500 hover:bg-red-50 dark:hover:bg-red-900 dark:hover:bg-opacity-20 rounded-lg p-2 transition-colors"
-                  title="Delete resource"
-                >
-                  <FiTrash2 className="w-5 h-5" />
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => editResource(r)}
+                    className="btn-icon text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900 dark:hover:bg-opacity-20 rounded-lg p-2 transition-colors"
+                    title="Edit resource"
+                  >
+                    <FiEdit2 className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => deleteResource(r.id)}
+                    className="btn-icon text-red-500 hover:bg-red-50 dark:hover:bg-red-900 dark:hover:bg-opacity-20 rounded-lg p-2 transition-colors"
+                    title="Delete resource"
+                  >
+                    <FiTrash2 className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
