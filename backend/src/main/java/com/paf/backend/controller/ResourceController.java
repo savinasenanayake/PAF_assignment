@@ -18,43 +18,63 @@ public class ResourceController {
         this.service = service;
     }
 
-    // CREATE
+    // ✅ CREATE (ADMIN ONLY)
     @PostMapping
-    public Resource createResource(@RequestBody Resource resource) {
+    public Object createResource(@RequestBody Resource resource,
+                                 @RequestParam String role) {
+
+        if (!"ADMIN".equals(role)) {
+            return "Access Denied: Admin only";
+        }
+
         return service.addResource(resource);
     }
 
-    // READ ALL
+    // ✅ READ ALL (PUBLIC)
     @GetMapping
     public List<Resource> getAllResources() {
         return service.getAllResources();
     }
 
-    // READ BY ID
+    // ✅ READ BY ID (PUBLIC)
     @GetMapping("/{id}")
     public Resource getResourceById(@PathVariable String id) {
         return service.getResourceById(id);
     }
 
-    // UPDATE
+    // ✅ UPDATE (ADMIN ONLY)
     @PutMapping("/{id}")
-    public Resource updateResource(@PathVariable String id, @RequestBody Resource resource) {
+    public Object updateResource(@PathVariable String id,
+                                 @RequestBody Resource resource,
+                                 @RequestParam String role) {
+
+        if (!"ADMIN".equals(role)) {
+            return "Access Denied: Admin only";
+        }
+
         return service.updateResource(id, resource);
     }
 
-    // DELETE
+    // ✅ DELETE (ADMIN ONLY)
     @DeleteMapping("/{id}")
-    public void deleteResource(@PathVariable String id) {
+    public Object deleteResource(@PathVariable String id,
+                                 @RequestParam String role) {
+
+        if (!"ADMIN".equals(role)) {
+            return "Access Denied: Admin only";
+        }
+
         service.deleteResource(id);
+        return "Deleted successfully";
     }
 
-    // FILTER
+    // ✅ FILTER (PUBLIC + FLEXIBLE)
     @GetMapping("/filter")
     public List<Resource> filterResources(
-            @RequestParam ResourceType type,
-            @RequestParam int capacity,
-            @RequestParam String location
+            @RequestParam(required = false) ResourceType type,
+            @RequestParam(required = false) Integer capacity,
+            @RequestParam(required = false) String location
     ) {
-        return service.filterResources(type, capacity, location);
+        return service.filterResourcesFlexible(type, capacity, location);
     }
 }

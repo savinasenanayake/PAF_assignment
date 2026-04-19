@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSun, FiMoon } from "react-icons/fi";
 import {
   getResources,
@@ -9,8 +10,11 @@ import ResourceForm from "./components/ResourceForm";
 import ResourceList from "./components/ResourceList";
 import Filter from "./components/Filter";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import Login from "./Login";
+import AdminPanel from "./AdminPanel";
 
-function AppContent() {
+
+function Dashboard() {
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(false);
   const { isDark, toggleTheme } = useTheme();
@@ -98,7 +102,13 @@ function AppContent() {
 function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
