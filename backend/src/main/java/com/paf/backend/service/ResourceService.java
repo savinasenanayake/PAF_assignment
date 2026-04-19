@@ -55,7 +55,15 @@ public class ResourceService {
     }
 
     // FILTERING
-    public List<Resource> filterResources(ResourceType type, int capacity, String location) {
-        return repository.findByTypeAndCapacityGreaterThanEqualAndLocation(type, capacity, location);
-    }
+   public List<Resource> filterResourcesFlexible(
+        ResourceType type,
+        Integer capacity,
+        String location
+) {
+    return getAllResources().stream()
+            .filter(r -> type == null || r.getType() == type)
+            .filter(r -> capacity == null || r.getCapacity() >= capacity)
+            .filter(r -> location == null || r.getLocation().equalsIgnoreCase(location))
+            .toList();
+}
 }
