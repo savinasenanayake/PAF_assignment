@@ -4,7 +4,8 @@ import { FiSun, FiMoon } from "react-icons/fi";
 import {
   getResources,
   deleteResource,
-  filterResources
+  filterResources,
+  updateResource
 } from "./services/ResourceService";
 import ResourceForm from "./components/ResourceForm";
 import ResourceList from "./components/ResourceList";
@@ -17,6 +18,7 @@ import AdminPanel from "./AdminPanel";
 function Dashboard() {
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [editingResource, setEditingResource] = useState(null);
   const { isDark, toggleTheme } = useTheme();
 
   const loadData = async () => {
@@ -48,6 +50,14 @@ function Dashboard() {
     }
   };
 
+  const handleEdit = (resource) => {
+    setEditingResource(resource);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingResource(null);
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-dark-900 text-gray-900 dark:text-gray-100">
       {/* Header */}
@@ -77,14 +87,23 @@ function Dashboard() {
           {/* Form Section */}
           <aside className="lg:col-span-1">
             <div className="sticky top-8">
-              <ResourceForm refresh={loadData} />
+              <ResourceForm 
+                refresh={loadData} 
+                editingResource={editingResource}
+                onCancelEdit={handleCancelEdit}
+              />
             </div>
           </aside>
 
           {/* List and Filter Section */}
           <section className="lg:col-span-2">
             <Filter onFilter={handleFilter} />
-            <ResourceList resources={resources} deleteResource={handleDelete} loading={loading} />
+            <ResourceList 
+              resources={resources} 
+              deleteResource={handleDelete} 
+              editResource={handleEdit}
+              loading={loading} 
+            />
           </section>
         </div>
       </main>
