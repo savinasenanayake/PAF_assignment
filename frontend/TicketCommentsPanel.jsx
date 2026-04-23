@@ -11,7 +11,7 @@ const ROLE_STYLE = {
   ADMIN: { background: '#fef3c7', color: '#92400e' },
   MANAGER: { background: '#f3e8ff', color: '#6b21a8' },
   TECHNICIAN: { background: '#dbeafe', color: '#1e40af' },
-  USER: { background: '#459a63ff', color: '#166534' },
+  USER: { background: '#dcfce7', color: '#166534' },
 };
 
 export default function TicketCommentsPanel({
