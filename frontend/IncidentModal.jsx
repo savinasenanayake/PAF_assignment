@@ -20,7 +20,7 @@ const CSS = `
   --ir-surface: #ffffff;
   --ir-border: #e4dfd4;
   --ir-text: #1c1917;
-  --ir-muted: #78716c;
+  --ir-muted: #e86100;
   --ir-accent: #0d7a6b;
   --ir-aclt: #0d7a6b18;
   --ir-danger: #be123c;
